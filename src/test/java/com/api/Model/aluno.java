@@ -13,21 +13,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="disciplina")
-public class DisciplinaModel implements Serializable {
+@Table(name="aluno")
+public class aluno implements Serializable {
    private static final long serial = 1L;
    
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private UUID id;
-   @Column(nullable=false, length=70)
+   @Column(nullable = false, length=50)
    private String nome;
-   @Column(nullable=true)
-   private String descricao;
+   @Column(nullable= true, length = 50)
+   private String email;
+   @Column(nullable = true, length = 50)
+   private String telefone;
    @ManyToOne
-   @JoinColumn(name ="professor_id")
-   private ProfessorModel professor_id;
-   
+   @JoinColumn(name = "turma_id")
+   private turmaModel turma_id;
    
 public UUID getId() {
 	return id;
@@ -41,22 +42,26 @@ public String getNome() {
 public void setNome(String nome) {
 	this.nome = nome;
 }
-public String getDescricao() {
-	return descricao;
+public String getEmail() {
+	return email;
 }
-public void setDescricao(String descricao) {
-	this.descricao = descricao;
+public void setEmail(String email) {
+	this.email = email;
 }
-public ProfessorModel getProfessor_id() {
-	return professor_id;
+public String getTelefone() {
+	return telefone;
 }
-public void setProfessor_id(ProfessorModel professor_id) {
-	this.professor_id = professor_id;
+public void setTelefone(String telefone) {
+	this.telefone = telefone;
+}
+public turmaModel getTurma_id() {
+	return turma_id;
+}
+public void setTurma_id(turmaModel turma_id) {
+	this.turma_id = turma_id;
 }
 public static long getSerial() {
 	return serial;
 }
-   
-   
-      
+    
 }
