@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface ProfessorRepository extends JpaRepository<ProfessorModel, UUID> {
 
+	ProfessorRepository save(ProfessorRepository professor);
+
 }
