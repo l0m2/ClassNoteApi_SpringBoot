@@ -1,13 +1,17 @@
-package com.api.Model;
+package com.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name= "professor")
 public class ProfessorModel implements Serializable{
 	
 	// ajuda a garantir que objetos sejam desserializados corretamente mesmo se a classe evoluir.  

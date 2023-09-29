@@ -1,4 +1,4 @@
-package com.api.Model;
+package com.Model;
 
 import java.io.Serializable;
 import java.util.UUID;

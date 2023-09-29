@@ -1,13 +1,17 @@
-package com.api.Model;
+package com.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="turma")
 public class turmaModel implements Serializable {
   private static final long serial = 1L;
   
@@ -49,7 +53,5 @@ public void setSemestre(String semestre) {
 public static long getSerial() {
 	return serial;
 }
-  
-  
-  
+    
 }
