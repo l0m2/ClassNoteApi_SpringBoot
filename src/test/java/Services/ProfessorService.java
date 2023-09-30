@@ -21,7 +21,7 @@ public class ProfessorService {
 	}
 	
 	@Transactional
-	public ProfessorRepository save(ProfessorRepository professor) {
+	public ProfessorModel save(ProfessorModel professor) {
 	 return _professorRepository.save(professor);
 	}
 	
@@ -44,4 +44,5 @@ public class ProfessorService {
 		}
 		return false;
 	}
+	
 }
