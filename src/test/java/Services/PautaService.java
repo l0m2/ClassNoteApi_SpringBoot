@@ -22,6 +22,8 @@ public class PautaService {
 	
 	@Transactional
 	public pautaModel save(pautaModel pauta) {
+		double media = pauta.CalcularMedia();
+		pauta.setMedia(media);
 		return _pautaRepository.save(pauta);
 	}
 	

@@ -29,8 +29,6 @@ public class pautaModel implements Serializable {
 	@Column(nullable=false)
 	private double segundoTeste;
 	@Column(nullable=true)
-	private double trabalho;
-	@Column(nullable=true)
 	private double media;
 	
 	public UUID getId() {
@@ -57,12 +55,6 @@ public class pautaModel implements Serializable {
 	public void setSegundoTeste(double segundoTeste) {
 		this.segundoTeste = segundoTeste;
 	}
-	public double getTrabalho() {
-		return trabalho;
-	}
-	public void setTrabalho(double trabalho) {
-		this.trabalho = trabalho;
-	}
 	public double getMedia() {
 		return media;
 	}
@@ -71,6 +63,10 @@ public class pautaModel implements Serializable {
 	}
 	public static long getSerial() {
 		return serial;
+	}
+	
+	public double CalcularMedia() {
+		return (primeiroTeste + segundoTeste) / 2;
 	}
 	
 	
