@@ -4,6 +4,8 @@ import Repositorios.ProfessorRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,21 @@ public class ProfessorService {
 	
 	public List<ProfessorModel> findAll(){
 		return _professorRepository.findAll();
+	}
+	
+	public Optional<ProfessorModel> findById(UUID id){
+		return _professorRepository.findById(id);
+	}
+	
+	@Transactional
+	public void delete(ProfessorModel professor) {
+		_professorRepository.delete(professor);
+	}
+	
+	public boolean existsById(UUID id) {
+		if(_professorRepository.existsById(id)) {
+			return true;
+		}
+		return false;
 	}
 }
