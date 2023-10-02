@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -71,5 +72,17 @@ public class DisciplinaController {
 			 return ResponseEntity.status(HttpStatus.OK).body("Disciplina apagada");
 		 }
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da disciplina fornecido nao existe");
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> atualizarDisciplina(@PathVariable (value = "id") UUID id, @RequestBody @Valid DisciplinaDTO disciplinaD){
+	 Optional<DisciplinaModel> disciplinaO = _disciplinaService.findById(id);
+	 if(disciplinaO.isPresent()) {
+		var disciplinaM = new DisciplinaModel();
+		BeanUtils.copyProperties(disciplinaD, disciplinaM);
+		disciplinaM.setId(disciplinaO.get().getId());
+		return ResponseEntity.status(HttpStatus.OK).body(_disciplinaService.save(disciplinaM));
+	 }
+	 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da disciplina fornecido nao existe");
 	}
 }
