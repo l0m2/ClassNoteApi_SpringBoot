@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,6 +66,16 @@ public class ProfessorController {
 		 Optional<ProfessorModel> professorO = _professorService.findById(id);
 		 if(professorO.isPresent()) {
 			 return ResponseEntity.status(HttpStatus.OK).body(professorO.get());
+		 }
+		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O professor nao existe!");
+	 }
+	 
+	 @DeleteMapping("/{id}")
+	 public ResponseEntity<Object> deleteProfessor(@PathVariable(value = "id") UUID id){
+		 Optional<ProfessorModel> professorO = _professorService.findById(id);
+		 if(professorO.isPresent()) {
+			 _professorService.delete(professorO.get());
+			 return ResponseEntity.status(HttpStatus.OK).body("Registo apagado");
 		 }
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O professor nao existe!");
 	 }
