@@ -1,8 +1,8 @@
-package com.Model;
+package com.api.ClassNote.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
-
+import com.api.ClassNote.Model.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="pauta")
-public class pautaModel implements Serializable {
+public class PautaModel implements Serializable {
   
 	private static final long serial = 1L;
 	
@@ -23,7 +23,7 @@ public class pautaModel implements Serializable {
 	private UUID id;
 	@ManyToOne
 	@JoinColumn(name ="aluno_id")
-	private alunoModel aluno_id;
+	private AlunoModel aluno_id;
 	@Column(nullable=false)
 	private double primeiroTeste;
 	@Column(nullable=false)
@@ -37,10 +37,10 @@ public class pautaModel implements Serializable {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public alunoModel getAluno_id() {
+	public AlunoModel getAluno_id() {
 		return aluno_id;
 	}
-	public void setAluno_id(alunoModel aluno_id) {
+	public void setAluno_id(AlunoModel aluno_id) {
 		this.aluno_id = aluno_id;
 	}
 	public double getPrimeiroTeste() {
@@ -68,6 +68,4 @@ public class pautaModel implements Serializable {
 	public double CalcularMedia() {
 		return (primeiroTeste + segundoTeste) / 2;
 	}
-	
-	
 }

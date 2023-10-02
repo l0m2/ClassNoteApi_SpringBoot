@@ -1,4 +1,4 @@
-package Services;
+package com.api.ClassNote.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.Model.DisciplinaModel;
-
-import Repositorios.DisciplinaRepository;
+import com.api.ClassNote.Repositorios.*;
+import com.api.ClassNote.Model.*;
 import jakarta.transaction.Transactional;
 
 @Service

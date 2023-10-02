@@ -1,4 +1,4 @@
-package com.Model;
+package com.api.ClassNote.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -11,11 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+import com.api.ClassNote.Model.*;
 
 @Entity
 @Table(name="aluno")
-public class alunoModel implements Serializable{
+public class AlunoModel implements Serializable{
 	   private static final long serial = 1L;
 	   
 	   @Id
@@ -29,7 +29,7 @@ public class alunoModel implements Serializable{
 	   private String telefone;
 	   @ManyToOne
 	   @JoinColumn(name = "turma_id")
-	   private turmaModel turma_id;
+	   private TurmaModel turma_id;
 	   
 	public UUID getId() {
 		return id;
@@ -55,14 +55,14 @@ public class alunoModel implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public turmaModel getTurma_id() {
+	public TurmaModel getTurma_id() {
 		return turma_id;
 	}
-	public void setTurma_id(turmaModel turma_id) {
+	public void setTurma_id(TurmaModel turma_id) {
 		this.turma_id = turma_id;
 	}
 	public static long getSerial() {
 		return serial;
 	}
-	    
+	   
 }

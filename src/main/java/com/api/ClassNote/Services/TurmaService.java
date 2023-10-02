@@ -1,4 +1,4 @@
-package Services;
+package com.api.ClassNote.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.Model.turmaModel;
-
-import Repositorios.TurmaRepository;
+import com.api.ClassNote.Model.*;
+import com.api.ClassNote.Repositorios.*;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -21,20 +20,20 @@ public class TurmaService {
 	}
 	
 	@Transactional
-	public turmaModel save(turmaModel turma) {
+	public TurmaModel save(TurmaModel turma) {
 		return _turmaRepository.save(turma);
 	}
 	
-	public List<turmaModel> findAll(){
+	public List<TurmaModel> findAll(){
 		return _turmaRepository.findAll();
 	}
 	
-	public Optional<turmaModel> findById(UUID id) {
+	public Optional<TurmaModel> findById(UUID id) {
 		return _turmaRepository.findById(id);
 	}
 	
 	@Transactional 
-	public void delete(turmaModel turma) {
+	public void delete(TurmaModel turma) {
 		_turmaRepository.delete(turma);
 	}
 	

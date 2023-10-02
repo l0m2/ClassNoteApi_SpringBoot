@@ -1,4 +1,4 @@
-package Services;
+package com.api.ClassNote.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.Model.pautaModel;
-
-import Repositorios.PautaRepository;
+import com.api.ClassNote.Repositorios.*;
+import com.api.ClassNote.Model.*;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -21,22 +20,22 @@ public class PautaService {
 	}
 	
 	@Transactional
-	public pautaModel save(pautaModel pauta) {
+	public PautaModel save(PautaModel pauta) {
 		double media = pauta.CalcularMedia();
 		pauta.setMedia(media);
 		return _pautaRepository.save(pauta);
 	}
 	
-	public List<pautaModel> findAll(){
+	public List<PautaModel> findAll(){
 		return _pautaRepository.findAll();
 	}
 	
-	public Optional<pautaModel> findById(UUID id){
+	public Optional<PautaModel> findById(UUID id){
 		return _pautaRepository.findById(id);
 	}
 	
 	@Transactional
-	public void delete(pautaModel pauta) {
+	public void delete(PautaModel pauta) {
 		_pautaRepository.delete(pauta);
 	}
 

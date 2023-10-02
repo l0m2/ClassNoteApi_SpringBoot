@@ -1,12 +1,11 @@
-package DTOs;
-import com.Model.ProfessorModel;
+package com.api.ClassNote.DTOs;
 
+import com.api.ClassNote.Model.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class DisciplinaDTO {
-
 	   @NotBlank
 	   @Size(min=2)
 	   private String nome;

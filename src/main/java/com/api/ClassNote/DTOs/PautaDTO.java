@@ -1,23 +1,20 @@
-package DTOs;
+package com.api.ClassNote.DTOs;
 
-import com.Model.alunoModel;
-
-import jakarta.persistence.Column;
+import com.api.ClassNote.Model.*;
 import jakarta.validation.constraints.NotNull;
 
 public class PautaDTO {
-
 	@NotNull
-	private alunoModel aluno_id;
+	private AlunoModel aluno_id;
     @NotNull
 	private double primeiroTeste;
 	@NotNull
 	private double segundoTeste;
 	
-	public alunoModel getAluno_id() {
+	public AlunoModel getAluno_id() {
 		return aluno_id;
 	}
-	public void setAluno_id(alunoModel aluno_id) {
+	public void setAluno_id(AlunoModel aluno_id) {
 		this.aluno_id = aluno_id;
 	}
 	public double getPrimeiroTeste() {
@@ -33,7 +30,4 @@ public class PautaDTO {
 		this.segundoTeste = segundoTeste;
 	}
 	
-
-	
-
 }

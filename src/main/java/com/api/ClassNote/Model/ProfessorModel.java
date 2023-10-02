@@ -1,4 +1,4 @@
-package com.Model;
+package com.api.ClassNote.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -54,5 +54,4 @@ public class ProfessorModel implements Serializable{
 		public static long getSerial() {
 			return serial;
 		}
-		
 }

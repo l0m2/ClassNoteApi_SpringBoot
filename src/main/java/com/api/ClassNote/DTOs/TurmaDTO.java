@@ -1,6 +1,5 @@
-package DTOs;
+package com.api.ClassNote.DTOs;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -30,6 +29,4 @@ public class TurmaDTO {
 	public void setSemestre(String semestre) {
 		this.semestre = semestre;
 	}
-	  
-	  
 }

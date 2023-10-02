@@ -1,7 +1,4 @@
-package Services;
-
-import Repositorios.ProfessorRepository;
-import jakarta.transaction.Transactional;
+package com.api.ClassNote.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +6,9 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.Model.ProfessorModel;
+import com.api.ClassNote.Repositorios.*;
+import com.api.ClassNote.Model.*;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProfessorService {
@@ -44,5 +43,7 @@ public class ProfessorService {
 		}
 		return false;
 	}
+	
+	
 	
 }

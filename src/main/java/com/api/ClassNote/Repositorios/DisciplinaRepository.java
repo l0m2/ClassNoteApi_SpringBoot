@@ -1,9 +1,10 @@
-package Repositorios;
-import com.Model.DisciplinaModel;
+package com.api.ClassNote.Repositorios;
+
+import org.springframework.stereotype.Repository;
+import com.api.ClassNote.Model.*;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DisciplinaRepository extends JpaRepository<DisciplinaModel, UUID> {

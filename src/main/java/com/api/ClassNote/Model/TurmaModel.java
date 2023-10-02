@@ -1,4 +1,4 @@
-package com.Model;
+package com.api.ClassNote.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="turma")
-public class turmaModel implements Serializable {
+public class TurmaModel implements Serializable {
   private static final long serial = 1L;
   
   @Id 
@@ -53,5 +53,5 @@ public void setSemestre(String semestre) {
 public static long getSerial() {
 	return serial;
 }
-    
+   
 }

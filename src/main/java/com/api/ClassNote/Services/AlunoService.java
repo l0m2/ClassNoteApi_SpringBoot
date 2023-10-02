@@ -1,4 +1,4 @@
-package Services;
+package com.api.ClassNote.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,10 +6,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.Model.alunoModel;
-import com.Model.turmaModel;
-
-import Repositorios.AlunoRepository;
+import com.api.ClassNote.Model.*;
+import com.api.ClassNote.Repositorios.*;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,20 +20,20 @@ public class AlunoService {
 	}
 	
 	@Transactional 
-	public alunoModel save(alunoModel aluno) {
+	public AlunoModel save(AlunoModel aluno) {
 		return _alunoRepository.save(aluno);
 	}
 	
-	public List<alunoModel> findAll(){
+	public List<AlunoModel> findAll(){
 		return _alunoRepository.findAll();
 	}
 	
-	public Optional<alunoModel> findById(UUID id) {
+	public Optional<AlunoModel> findById(UUID id) {
 		return _alunoRepository.findById(id);
 	}
 	
 	@Transactional  
-	public void delete(alunoModel aluno) {
+	public void delete(AlunoModel aluno) {
 		_alunoRepository.delete(aluno);
 	}
 	

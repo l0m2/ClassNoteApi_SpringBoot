@@ -1,7 +1,9 @@
-package com.Model;
+package com.api.ClassNote.Model;
 
 import java.io.Serializable;
 import java.util.UUID;
+
+import com.api.ClassNote.Model.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,5 +60,4 @@ public static long getSerial() {
 }
    
    
-      
 }
