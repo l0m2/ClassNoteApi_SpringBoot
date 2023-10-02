@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfessorRepository extends JpaRepository<ProfessorModel, UUID> {
 
+	//boolean verificarSeExiste(String s);
+
 }

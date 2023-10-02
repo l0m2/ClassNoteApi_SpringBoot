@@ -1,9 +1,13 @@
 package com.api.ClassNote.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,21 +25,21 @@ import jakarta.validation.Valid;
 public class ProfessorController {
 	
 	final ProfessorService _professorService;
-	
+	@Autowired 
 	public ProfessorController(ProfessorService professor) {
 		_professorService = professor;
 	}
 	
 	 @PostMapping
 	 public ResponseEntity<Object> salvaProfessor(@RequestBody @Valid ProfessorDTO professorD){
-		 
-	  if(_professorService.equals(professorD.getTelefone())) {
+/* 
+	  if(_professorService.verificarSeExiste(professorD.getTelefone())){
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("O numero de telefone ja existe");
 		}
 		
-		if(_professorService.equals(professorD.getEmail())) {
+		if(_professorService.verificarSeExiste(professorD.getEmail())) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("O email ja existe");
-		}
+		}*/
 		
 		ProfessorModel professorM = new ProfessorModel();
 		BeanUtils.copyProperties(professorD, professorM);
@@ -45,5 +49,10 @@ public class ProfessorController {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao Registar o professor");
 		
+	 }
+	 
+	 @GetMapping
+	 public ResponseEntity<List<ProfessorModel>> listarProfessores(){
+		 return ResponseEntity.status(HttpStatus.OK).body(_professorService.findAll());
 	 }
 }

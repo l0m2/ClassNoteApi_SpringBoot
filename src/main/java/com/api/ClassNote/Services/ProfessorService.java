@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.ClassNote.Repositorios.*;
@@ -14,7 +15,7 @@ import jakarta.transaction.Transactional;
 public class ProfessorService {
 
 	final ProfessorRepository _professorRepository;
-	
+	@Autowired 
 	public ProfessorService(ProfessorRepository professorRepository) {
 		_professorRepository = professorRepository;
 	}
@@ -44,6 +45,9 @@ public class ProfessorService {
 		return false;
 	}
 	
-	
+	/*
+	public boolean verificarSeExiste(String s) {
+	 return _professorRepository.verificarSeExiste(s);
+	}*/
 	
 }
