@@ -1,12 +1,16 @@
 package com.api.ClassNote.Controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,4 +48,18 @@ public class DisciplinaController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao foi possivel fazer o registo");
 	}
 	 
+	@GetMapping
+	public ResponseEntity<List<DisciplinaModel>> listarDisciplina(){
+	  	return ResponseEntity.status(HttpStatus.OK).body(_disciplinaService.findAll());
+	}
+	 
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> umaDisciplina(@PathVariable (value = "id") UUID id){
+		Optional<DisciplinaModel> disciplinaO = _disciplinaService.findById(id);
+		if(disciplinaO.isPresent()) {
+			return ResponseEntity.status(HttpStatus.OK).body(disciplinaO.get());
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da disciplina Fornecido nao existe");
+		
+	}
 }
