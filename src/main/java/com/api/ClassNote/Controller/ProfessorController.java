@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -76,6 +77,18 @@ public class ProfessorController {
 		 if(professorO.isPresent()) {
 			 _professorService.delete(professorO.get());
 			 return ResponseEntity.status(HttpStatus.OK).body("Registo apagado");
+		 }
+		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O professor nao existe!");
+	 }
+	 
+	 @PutMapping("/{id}")
+	 public ResponseEntity<Object> atualizaProfessor(@PathVariable(value ="id") UUID id, @RequestBody @Valid ProfessorDTO professorD){
+		 Optional<ProfessorModel> professorO = _professorService.findById(id);
+		 if(professorO.isPresent()) {
+			 ProfessorModel professorM = new ProfessorModel();
+			 BeanUtils.copyProperties(professorD, professorM);
+			 professorM.setId(professorO.get().getId());
+			 return ResponseEntity.status(HttpStatus.OK).body(_professorService.save(professorM));
 		 }
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O professor nao existe!");
 	 }
