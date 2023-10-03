@@ -40,7 +40,7 @@ public class PautaModel implements Serializable {
 	public AlunoModel getAluno() {
 		return aluno;
 	}
-	public void setAluno_id(AlunoModel aluno) {
+	public void setAluno(AlunoModel aluno) {
 		this.aluno = aluno;
 	}
 	public double getPrimeiroTeste() {

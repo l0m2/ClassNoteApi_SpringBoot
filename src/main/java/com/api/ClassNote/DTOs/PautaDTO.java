@@ -1,20 +1,22 @@
 package com.api.ClassNote.DTOs;
 
+import java.util.UUID;
+
 import com.api.ClassNote.Model.*;
 import jakarta.validation.constraints.NotNull;
 
 public class PautaDTO {
 	@NotNull
-	private AlunoModel aluno_id;
+	private UUID aluno_id;
     @NotNull
 	private double primeiroTeste;
 	@NotNull
 	private double segundoTeste;
 	
-	public AlunoModel getAluno_id() {
+	public UUID getAluno_id() {
 		return aluno_id;
 	}
-	public void setAluno_id(AlunoModel aluno_id) {
+	public void setAluno_id(UUID aluno_id) {
 		this.aluno_id = aluno_id;
 	}
 	public double getPrimeiroTeste() {
