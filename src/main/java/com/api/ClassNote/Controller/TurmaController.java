@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,5 +58,15 @@ public class TurmaController {
 			return ResponseEntity.status(HttpStatus.OK).body(turmaO.get()); 
 		 }
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da turma fornecido nao existe");
+	 }
+	 
+	 @DeleteMapping("/{id}")
+	 public ResponseEntity<Object> deleteTurma(@PathVariable (value = "id") UUID id){
+		 Optional<TurmaModel> turmaO = turmaService.findById(id);
+		 if(turmaO.isPresent()) {
+			turmaService.delete(turmaO.get());
+			return ResponseEntity.status(HttpStatus.OK).body("A turma foi apagada com sucesso");
+		 }
+		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("o id da turma fornecido nao existe");
 	 }
 }
