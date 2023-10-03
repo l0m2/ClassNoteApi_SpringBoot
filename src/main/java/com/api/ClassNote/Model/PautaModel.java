@@ -22,8 +22,8 @@ public class PautaModel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	@ManyToOne
-	@JoinColumn(name ="aluno_id")
-	private AlunoModel aluno_id;
+	@JoinColumn(name ="aluno")
+	private AlunoModel aluno;
 	@Column(nullable=false)
 	private double primeiroTeste;
 	@Column(nullable=false)
@@ -37,11 +37,11 @@ public class PautaModel implements Serializable {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public AlunoModel getAluno_id() {
-		return aluno_id;
+	public AlunoModel getAluno() {
+		return aluno;
 	}
-	public void setAluno_id(AlunoModel aluno_id) {
-		this.aluno_id = aluno_id;
+	public void setAluno_id(AlunoModel aluno) {
+		this.aluno = aluno;
 	}
 	public double getPrimeiroTeste() {
 		return primeiroTeste;

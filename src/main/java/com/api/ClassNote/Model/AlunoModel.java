@@ -28,8 +28,8 @@ public class AlunoModel implements Serializable{
 	   @Column(nullable = true, length = 50)
 	   private String telefone;
 	   @ManyToOne
-	   @JoinColumn(name = "turma_id")
-	   private TurmaModel turma_id;
+	   @JoinColumn(name = "turma")
+	   private TurmaModel turma;
 	   
 	public UUID getId() {
 		return id;
@@ -55,11 +55,11 @@ public class AlunoModel implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public TurmaModel getTurma_id() {
-		return turma_id;
+	public TurmaModel getTurma() {
+		return turma;
 	}
-	public void setTurma_id(TurmaModel turma_id) {
-		this.turma_id = turma_id;
+	public void setTurma_id(TurmaModel turma) {
+		this.turma = turma;
 	}
 	public static long getSerial() {
 		return serial;

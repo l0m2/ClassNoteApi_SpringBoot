@@ -27,8 +27,8 @@ public class DisciplinaModel implements Serializable {
    @Column(nullable=true)
    private String descricao;
    @ManyToOne
-   @JoinColumn(name ="professor_id")
-   private ProfessorModel professor_id;
+   @JoinColumn(name ="professor")
+   private ProfessorModel professor;
    
    
 public UUID getId() {
@@ -49,11 +49,11 @@ public String getDescricao() {
 public void setDescricao(String descricao) {
 	this.descricao = descricao;
 }
-public ProfessorModel getProfessor_id() {
-	return professor_id;
+public ProfessorModel getProfessor() {
+	return professor;
 }
-public void setProfessor_id(ProfessorModel professor_id) {
-	this.professor_id = professor_id;
+public void setProfessor(ProfessorModel professor) {
+	this.professor = professor;
 }
 public static long getSerial() {
 	return serial;

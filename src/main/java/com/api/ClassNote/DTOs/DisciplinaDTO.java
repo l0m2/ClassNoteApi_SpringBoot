@@ -1,5 +1,7 @@
 package com.api.ClassNote.DTOs;
 
+import java.util.UUID;
+
 import com.api.ClassNote.Model.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +14,7 @@ public class DisciplinaDTO {
 	   @NotBlank
 	   private String descricao;
 	   @NotNull
-	   private ProfessorModel professor_id;
+	   private UUID professor_id;
 	   
 	public String getNome() {
 		return nome;
@@ -26,10 +28,10 @@ public class DisciplinaDTO {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public ProfessorModel getProfessor_id() {
+	public UUID getProfessor_id() {
 		return professor_id;
 	}
-	public void setProfessor_id(ProfessorModel professor_id) {
+	public void setProfessor_id(UUID professor_id) {
 		this.professor_id = professor_id;
 	}
 }

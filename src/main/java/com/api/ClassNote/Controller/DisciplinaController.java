@@ -33,6 +33,7 @@ public class DisciplinaController {
   
 	 @Autowired
 	 DisciplinaService _disciplinaService;
+	 @Autowired
 	 ProfessorService _professorService;
 	 
 	 public DisciplinaController() {
@@ -42,13 +43,18 @@ public class DisciplinaController {
 	 @PostMapping
 	 public ResponseEntity<Object> salvaDisciplina(@RequestBody  @Valid DisciplinaDTO disciplinaD){
          DisciplinaModel disciplinaM = new DisciplinaModel();
+         Optional<ProfessorModel> professorO = _professorService.findById(disciplinaD.getProfessor_id());
+     if(professorO.isPresent()) {
 		 BeanUtils.copyProperties(disciplinaD, disciplinaM);
+		 disciplinaM.setProfessor(professorO.get());
 		 var salvo = _disciplinaService.save(disciplinaM);
 	 if(salvo != null) {
 			return ResponseEntity.status(HttpStatus.OK).body(disciplinaM);
 	   }
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nao foi possivel fazer o registo");
-	}
+     }
+     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id do Professor fornecido nao existe");
+	}	 
 	 
 	@GetMapping
 	public ResponseEntity<List<DisciplinaModel>> listarDisciplina(){
@@ -78,10 +84,15 @@ public class DisciplinaController {
 	public ResponseEntity<Object> atualizarDisciplina(@PathVariable (value = "id") UUID id, @RequestBody @Valid DisciplinaDTO disciplinaD){
 	 Optional<DisciplinaModel> disciplinaO = _disciplinaService.findById(id);
 	 if(disciplinaO.isPresent()) {
+		 Optional<ProfessorModel> professorO = _professorService.findById(disciplinaD.getProfessor_id());
+		if(professorO.isPresent()) {
 		var disciplinaM = new DisciplinaModel();
 		BeanUtils.copyProperties(disciplinaD, disciplinaM);
+		disciplinaM.setProfessor(professorO.get());
 		disciplinaM.setId(disciplinaO.get().getId());
 		return ResponseEntity.status(HttpStatus.OK).body(_disciplinaService.save(disciplinaM));
+	 }
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id do professor fornecido nao existe!");
 	 }
 	 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da disciplina fornecido nao existe");
 	}
