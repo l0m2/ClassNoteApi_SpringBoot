@@ -7,11 +7,14 @@ import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,5 +71,32 @@ public class AlunoController {
 		  return ResponseEntity.status(HttpStatus.OK).body(alunoO.get());
 	  }
 	  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O id do aluno fornecido nao existe");
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> apagarAluno(@PathVariable (value = "id") UUID id){
+	  alunoO = alunoService.findById(id);
+	  if(alunoO.isPresent()) {
+		  alunoService.delete(alunoO.get());
+		  return ResponseEntity.status(HttpStatus.OK).body("Aluno apagado com sucesso");
+	  }
+	  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id do aluno fornecido nao existe");
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> atualizaAluno(@PathVariable (value="id") UUID id, @RequestBody @Valid AlunoDTO alunoD){
+	 alunoO = alunoService.findById(id);
+	 if(alunoO.isPresent()) {
+		turmaO = turmaService.findById(alunoD.getTurma_id());
+		if(turmaO.isPresent()) {
+		 BeanUtils.copyProperties(alunoD,alunoM);
+		 alunoM.setTurma(turmaO.get());
+		 alunoM.setId(id);
+		 alunoService.save(alunoM);
+		 return ResponseEntity.status(HttpStatus.OK).body(alunoM);
+		}
+	  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da turma fornecida nao existe");
+	 }
+	 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id do aluno fornecido nao existe");
 	}
 }
