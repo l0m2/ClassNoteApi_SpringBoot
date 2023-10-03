@@ -1,12 +1,16 @@
 package com.api.ClassNote.Controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +53,20 @@ public class PautaController {
 		   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro no registo da pauta");
 		 }
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id do aluno fornecido nao existe");
+	 }
+	 
+	 @GetMapping
+	 public ResponseEntity<List<PautaModel>> ListarPauta(){
+		 return ResponseEntity.status(HttpStatus.OK).body(pautaService.findAll());
+	 }
+	 
+	 @GetMapping("/{id}")
+	 public ResponseEntity<Object> umPauta(@PathVariable (value = "id") UUID id){
+	  pautaO = pautaService.findById(id);
+	  if(pautaO.isPresent()) {
+	   return ResponseEntity.status(HttpStatus.OK).body(pautaO.get()); 
+	  }
+	  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da pauta fornecido nao existe");
 	 }
 	
 }
