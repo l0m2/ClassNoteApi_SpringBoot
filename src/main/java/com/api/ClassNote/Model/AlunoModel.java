@@ -58,7 +58,7 @@ public class AlunoModel implements Serializable{
 	public TurmaModel getTurma() {
 		return turma;
 	}
-	public void setTurma_id(TurmaModel turma) {
+	public void setTurma(TurmaModel turma) {
 		this.turma = turma;
 	}
 	public static long getSerial() {

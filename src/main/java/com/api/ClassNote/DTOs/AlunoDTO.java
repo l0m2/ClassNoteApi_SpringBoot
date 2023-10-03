@@ -1,5 +1,7 @@
 package com.api.ClassNote.DTOs;
 
+import java.util.UUID;
+
 import com.api.ClassNote.Model.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +17,7 @@ public class AlunoDTO {
 	   @NotBlank
 	   private String telefone;
 	   @NotNull
-	   private TurmaModel turma_id;
+	   private UUID turma_id;
 	   
 	public String getNome() {
 		return nome;
@@ -35,10 +37,10 @@ public class AlunoDTO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public TurmaModel getTurma_id() {
+	public UUID getTurma_id() {
 		return turma_id;
 	}
-	public void setTurma_id(TurmaModel turma_id) {
+	public void setTurma_id(UUID turma_id) {
 		this.turma_id = turma_id;
 	}
 	   
