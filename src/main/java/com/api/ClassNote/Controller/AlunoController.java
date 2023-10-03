@@ -1,12 +1,16 @@
 package com.api.ClassNote.Controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +33,9 @@ public class AlunoController {
 	AlunoService alunoService;
 	@Autowired
 	TurmaService turmaService;
-	static AlunoModel alunoM =  new AlunoModel();
-	static Optional<TurmaModel> turmaO;
+	private AlunoModel alunoM =  new AlunoModel();
+	private Optional<AlunoModel> alunoO;
+	private Optional<TurmaModel> turmaO;
 	
 	public AlunoController() {
 		
@@ -49,5 +54,19 @@ public class AlunoController {
 		 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro no cadastro do aluno");
 		}
 	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da turma Fornecido nao existe");
+	}
+	
+	@GetMapping 
+	public ResponseEntity<List<AlunoModel>> listarAlunos(){
+		return ResponseEntity.status(HttpStatus.OK).body(alunoService.findAll());
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> umAluno(@PathVariable (value = "id") UUID id){
+	  alunoO =  alunoService.findById(id);
+	  if(alunoO.isPresent()) {
+		  return ResponseEntity.status(HttpStatus.OK).body(alunoO.get());
+	  }
+	  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O id do aluno fornecido nao existe");
 	}
 }
