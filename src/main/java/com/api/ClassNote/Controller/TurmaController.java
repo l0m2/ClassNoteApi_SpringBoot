@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,13 +32,16 @@ public class TurmaController {
    
 	 @Autowired
 	 TurmaService turmaService;
+	 
+	 static Optional<TurmaModel> turmaO ;
+	 static TurmaModel turmaM =  new TurmaModel();
+	 
 	 public TurmaController() {
 		 
 	 }
 	 
 	 @PostMapping
 	 public ResponseEntity<Object> salvaTurma(@RequestBody @Valid TurmaDTO turmaD){
-		TurmaModel turmaM =  new TurmaModel();
 		BeanUtils.copyProperties(turmaD, turmaM);
 		var salvo = turmaService.save(turmaM);
 		if(salvo != null) {
@@ -53,7 +57,7 @@ public class TurmaController {
 	 
 	 @GetMapping("/{id}")
 	 public ResponseEntity<Object> umaTurma(@PathVariable (value = "id") UUID id){
-		 Optional<TurmaModel> turmaO = turmaService.findById(id);
+		 turmaO = turmaService.findById(id);
 		 if(turmaO.isPresent()) {
 			return ResponseEntity.status(HttpStatus.OK).body(turmaO.get()); 
 		 }
@@ -62,11 +66,25 @@ public class TurmaController {
 	 
 	 @DeleteMapping("/{id}")
 	 public ResponseEntity<Object> deleteTurma(@PathVariable (value = "id") UUID id){
-		 Optional<TurmaModel> turmaO = turmaService.findById(id);
 		 if(turmaO.isPresent()) {
 			turmaService.delete(turmaO.get());
 			return ResponseEntity.status(HttpStatus.OK).body("A turma foi apagada com sucesso");
 		 }
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("o id da turma fornecido nao existe");
+	 }
+	 
+	 @PutMapping("/{id}")
+	 public ResponseEntity<Object> atualizaTurma(@PathVariable (value= "id") UUID id, @RequestBody @Valid TurmaDTO turmaD){
+	     turmaO = turmaService.findById(id);
+	     if(turmaO.isPresent()) {
+	    	BeanUtils.copyProperties(turmaD, turmaM);
+	    	turmaM.setId(id);
+	    	var salvo = turmaService.save(turmaM);
+	    	if(salvo != null) {
+	    	return ResponseEntity.status(HttpStatus.OK).body(turmaM);
+	    	}
+	    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro na atualizacao");
+	     }
+	     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da turma fornecido nao existe!");
 	 }
 }
