@@ -1,10 +1,17 @@
 package com.api.ClassNote.Controller;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +43,19 @@ public class TurmaController {
 		return ResponseEntity.status(HttpStatus.OK).body(turmaM);
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro no cadastro da turma");
+	 }
+	 
+	 @GetMapping
+	 public ResponseEntity<List<TurmaModel>> listarTurmas(){
+		 return ResponseEntity.status(HttpStatus.OK).body(turmaService.findAll());
+	 }
+	 
+	 @GetMapping("/{id}")
+	 public ResponseEntity<Object> umaTurma(@PathVariable (value = "id") UUID id){
+		 Optional<TurmaModel> turmaO = turmaService.findById(id);
+		 if(turmaO.isPresent()) {
+			return ResponseEntity.status(HttpStatus.OK).body(turmaO.get()); 
+		 }
+		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id da turma fornecido nao existe");
 	 }
 }
